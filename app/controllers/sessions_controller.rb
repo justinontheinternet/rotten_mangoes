@@ -13,4 +13,10 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to movies_path, notice: "Goodbye"
+  end
+  
 end
