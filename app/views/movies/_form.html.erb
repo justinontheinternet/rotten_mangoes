@@ -1,7 +1,17 @@
 <%= form_for @movie do |f| %>
+  <% if @movie.errors.any? %>
+    <div>
+      <%= pluralize(@movie.errors.count, "error") %> prevented this movie from being added:
+      <ul>
+        <% @movie.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div>
     <%= f.label :title %><br>
-    <%- f.text_field :title %>
+    <%= f.text_field :title %>
   </div>
   <div>
     <%= f.label :release_date %><br>
