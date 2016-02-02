@@ -28,7 +28,10 @@ gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-# gem 'pry'
+gem 'pry'
+gem 'carrierwave'
+# gem 'mini_magick', '~> 4.3'
+gem 'rmagick'
 
 # Use unicorn as the app server
 # gem 'unicorn'
