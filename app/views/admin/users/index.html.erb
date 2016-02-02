@@ -1,8 +1,20 @@
 <h3>List of users</h3>
 
-<% @users.each do |user| %>
-  <h2>Name: <%= user.full_name %></h2>
-  <h4>Email: <%= user.email %></h4>
-  <h4>Admin Status: <%= user.admin %></h4>
-  <hr>
-<% end %>
+<%= paginate @users %>
+
+<table border="1">
+  <thead>
+    <th>Name:</th>
+    <th>Email:</th>
+    <th>Admin Status:</th>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.full_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

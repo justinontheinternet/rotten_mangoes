@@ -1,8 +1,8 @@
 class Admin::UsersController < ApplicationController
 
   def index
-    if current_user.admin
-      @users = User.all
+    if current_user && current_user.admin
+      @users = User.all.page(params[:page]).per(2)
     else
       redirect_to movies_path
     end

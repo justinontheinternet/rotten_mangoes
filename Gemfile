@@ -32,6 +32,7 @@ gem 'pry'
 gem 'carrierwave'
 # gem 'mini_magick', '~> 4.3'
 gem 'rmagick'
+gem 'kaminari'
 
 # Use unicorn as the app server
 # gem 'unicorn'
