@@ -1,0 +1,8 @@
+<h3>List of users</h3>
+
+<% @users.each do |user| %>
+  <h2>Name: <%= user.full_name %></h2>
+  <h4>Email: <%= user.email %></h4>
+  <h4>Admin Status: <%= user.admin %></h4>
+  <hr>
+<% end %>

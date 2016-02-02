@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    @user.admin = false
     if @user.save
       session[:user_id] = @user.id #auto log in upon signup
       redirect_to movies_path, notice: "Welcome aboard, #{@user.firstname}!"
