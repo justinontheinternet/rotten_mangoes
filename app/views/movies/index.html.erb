@@ -2,11 +2,12 @@
 <%= link_to "Submit a movie!", new_movie_path %>
 
 <%= form_tag movies_path, method: "get" do %>
-  <%= text_field_tag :title, nil, placeholder: "Search Titles" %><br>
-  <%= text_field_tag :director, nil, placeholder: "Search Directors" %><br>
-  <%= select_tag :runtime, options_for_select([['Under 90 min', 1], ['90 to 120 min', 2], ['Over 120 min', 3]]), include_blank: true %><br>
+  <%= text_field_tag :title, params[:title], placeholder: "Search Titles" %><br>
+  <%= text_field_tag :director, params[:director], placeholder: "Search Directors" %><br>
+  <%= select_tag :runtime, options_for_select([['Under 90 min', 1], ['90 to 120 min', 2], ['Over 120 min', 3]], params[:runtime]), include_blank: true %><br>
   <%= submit_tag "Search", :name => nil %>
 <% end %>
+<%= button_to "Clear", movies_path, method: :get %>
 <hr>
 
 <% @movies.each do |movie| %>
