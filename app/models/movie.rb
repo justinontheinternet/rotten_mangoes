@@ -21,8 +21,8 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def self.search(search_title, search_director)
-    return self.all unless search_title.present? || search_director.present?
+  def self.search(search_title, search_director, search_runtime)
+    return self.all unless search_title.present? || search_director.present? || search_runtime.present?
     query = self.all
     # if title field is not blank, add it to query
     if !search_title.blank?
@@ -33,6 +33,16 @@ class Movie < ActiveRecord::Base
       query = query.where("director LIKE ?", "%#{search_director}%")
     end
     # explicit return because last evaluated statement in scope is if statement
+    if !search_runtime.blank?
+      # binding.pry
+      if search_runtime.to_i == 1
+        query = query.where("runtime_in_minutes < 90")
+      elsif search_runtime.to_i == 2
+        query = query.where("runtime_in_minutes BETWEEN 89 AND 121")
+      else
+        query = query.where("runtime_in_minutes > 120")
+      end
+    end
     query
   end
 
