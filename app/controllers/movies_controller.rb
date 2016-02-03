@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
+  
   def index
-    @movies = Movie.all
+    @movies = Movie.search(params[:title], params[:director])
   end
 
   def show
@@ -27,7 +28,6 @@ class MoviesController < ApplicationController
 
   def update
     @movie = Movie.find(params[:id])
-
     if @movie.update_attributes(movie_params)
       redirect_to movie_path(@movie)
     else
