@@ -6,13 +6,28 @@ class Admin::UsersController < ApplicationController
       @users = User.all.page(params[:page]).per(2)
   end
 
+  def new
+    @user = User.new
+  end
+
   def edit
     @user = User.find(params[:id])
   end
 
+  def create
+    @user = User.new(admin_params)
+    if @user.save
+      redirect_to admin_user_path
+    else
+      render :new
+    end
+  end
+
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    if @user.destroy
+      UserMailer.deletion_email(@user).deliver
+    end
     redirect_to movies_path
   end
   

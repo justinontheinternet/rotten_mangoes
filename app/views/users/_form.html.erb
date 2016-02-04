@@ -9,6 +9,7 @@
      </ul>
    </div>
   <% end %>
+
   <div>
     <%= f.label :email %><br>
     <%= f.text_field :email %>
@@ -29,5 +30,11 @@
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation %>
   </div>
+  <% if current_user.admin %>
+    <div>
+      <%= f.label "Admin?" %>
+      <%= f.check_box :admin, {}, true, false %>
+    </div>
+  <% end %>
   <div><%= f.submit "Submit" %></div>
 <% end %>
