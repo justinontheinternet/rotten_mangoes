@@ -1,11 +1,13 @@
 class Admin::UsersController < ApplicationController
 
+  before_filter :check_admin_status
+
   def index
-    if current_user && current_user.admin
       @users = User.all.page(params[:page]).per(2)
-    else
-      redirect_to movies_path
-    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
   end
 
   def destroy
@@ -42,11 +44,11 @@ class Admin::UsersController < ApplicationController
   protected
 
   def admin_params
-    params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
+    params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation, :admin)
   end
 
-  # def check_admin
-  #   current_user.admin
-  # end
+  def check_admin_status
+    redirect_to movies_path unless current_user && current_user.admin
+  end
 
 end
