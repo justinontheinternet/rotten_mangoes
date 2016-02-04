@@ -1,7 +1,7 @@
 <footer>
   <small>
     <% if current_user %>
-      Signed in as <%= current_user.full_name %> (<%= link_to "Log out", session_path("current"), method: :delete %>)
+      Signed in as <%= current_user.full_name %> (<%= link_to "Log out", "/session", method: :delete %>)
         <% if current_user.admin %>
          | (<%= link_to "Admin Manager", admin_users_path %>) | (<%= link_to "Back to Movies", movies_path %>)
         <% end %>
