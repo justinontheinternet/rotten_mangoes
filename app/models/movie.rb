@@ -4,8 +4,8 @@ class Movie < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  scope :search_title, -> (term) { where("title LIKE ?", "%#{term}%")}
-  scope :search_director, -> (term) { where("director LIKE ?", "%#{term}%")}
+  scope :search_title, -> (term) { where("title LIKE ?", "%#{term}%") }
+  scope :search_director, -> (term) { where("director LIKE ?", "%#{term}%") }
   scope :search_runtime, -> (value) {
     if value.to_i == 1
       where("runtime_in_minutes < 90")
@@ -15,9 +15,10 @@ class Movie < ActiveRecord::Base
       where("runtime_in_minutes > 120")
     end
   }
-  scope :total_search, -> (term_1, term_2, value) {
-    search_title(term_1).search_director(term_2).search_runtime(value)
-  }
+  # scope :total_search, -> (term_1, term_2, value) {
+  #   search_title(term_1).search_director(term_2).search_runtime(value)
+  # }
+  scope :combo_search, -> (term) { where("title LIKE ? OR director LIKE ?", "%#{term}%", "%#{term}%") }
 
 
   validates :title, presence: true
